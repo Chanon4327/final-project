@@ -1,0 +1,14 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+
+#game-container {
+    width: 800px;
+    height: 600px;
+    background-color: black;
+}
