@@ -2,7 +2,7 @@
 
 import { canvas, ctx } from './script.js'
 
-export class Player {
+export class FrogSprite {
     constructor() {
         this.x = canvas.width / 2;
         this.y = canvas.height - 20; // minus the width
@@ -12,15 +12,25 @@ export class Player {
         this.maxJumpPower = 40;
         this.minJumpPower = 10;
         this.jumpCharge = 0; // how much the jump is charged
-        this.gravity = 2;
+        this.gravity = 2; // can change the gravity of the player
         this.velocityY = 0;
+        this.velocityX = 0;
         this.isJumping = false;
+        this.movingLeft = false;
+        this.movingRight = false;
     }
 
     startJump() {
         if (this.onGround() && !this.isJumping) {
             this.isJumping = true;
             this.jumpCharge = this.minJumpPower;
+        }
+
+        this.velocityX = 0;
+        if (this.movingLeft) {
+            this.velocityX = -this.speed;
+        } else if (this.movingRight) {
+            this.velocityX = this.speed;
         }
     }
 
@@ -35,7 +45,7 @@ export class Player {
 
     chargeJump() {
         if (this.isJumping && this.jumpCharge < this.maxJumpPower) {
-            this.jumpCharge += 1;
+            this.jumpCharge += 0.5;
             //console.log (this.jumpCharge)
         } 
     }
@@ -46,18 +56,38 @@ export class Player {
     }
 
     update() {
+        // Jump Charge
         this.chargeJump();
         console.log('Updating, jumpCharge:', this.jumpCharge);
-        
+
         this.velocityY += this.gravity;
         this.y += this.velocityY;
-
+        
         // prevent from dropping through ground
         if (this.y > canvas.height - this.height) {
             this.y = canvas.height - this.height;
             this.velocityY = 0;
+            this.velocityX = 0;
         }
 
+        // Horizontal movement
+        if (this.movingLeft) {
+            this.velocityX = -this.speed;
+        } else if (this.movingRight) {
+            this.velocityX = this.speed;
+        } 
+
+        // can move horizontally in the air
+        if (!this.onGround()) {
+            this.x += this.velocityX;
+        } else {
+            this.velocityX *= 0.9; // friction
+            this.velocityX = 0;
+        }
+
+        this.x += this.velocityX;
+        this.x = Math.max(0, Math.min(this.x, canvas.width - this.width)); 
+        
     }
 
     draw(ctx) {
