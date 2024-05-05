@@ -10,8 +10,8 @@ export class FrogSprite {
     constructor() {
         this.x = canvas.width / 2;
         this.y = canvas.height - 20; // minus the width
-        this.width = 20;
-        this.height = 20;
+        this.width = 30;
+        this.height = 30;
         this.speed = 7;
         this.maxJumpPower = 20;
         this.minJumpPower = 5;
@@ -22,6 +22,7 @@ export class FrogSprite {
         this.isJumping = false;
         this.movingLeft = false;
         this.movingRight = false;
+        this.image = new Image();
     }
 
     startJump(platforms) {
@@ -161,8 +162,24 @@ export class FrogSprite {
     }
     
 
+    // draw(ctx) {
+    //     ctx.fillStyle = 'red';
+    //     ctx.fillRect(this.x, this.y, this.width, this.height);
+    // }
     draw(ctx) {
-        ctx.fillStyle = 'red';
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.image.src = '../css/frog.png'
+        let imgAspectRatio = this.image.naturalWidth / this.image.naturalHeight;
+        let scaleWidth = this.width; // Scale based on platform width
+        let scaleHeight = scaleWidth / imgAspectRatio; // Calculate the height based on the width
+
+        let offsetX = (this.width - scaleWidth) / 2;
+        let offsetY = (this.height - scaleHeight) / 2;
+        if (this.image.complete) {
+            ctx.drawImage(this.image, this.x + offsetX, this.y + offsetY, scaleWidth, scaleHeight);
+        } else {
+            this.image.onload = () => {
+                ctx.drawImage(this.image, this.x + offsetX, this.y + offsetY, scaleWidth, scaleHeight);
+            };
+        }
     }
 }

@@ -179,6 +179,6 @@ function randomIntFromInterval(min, max) { // min and max included
 }
 
 //initSkyLevel();
-initSpaceLevel();
-//initForestLevel(); // default
+//initSpaceLevel();
+initForestLevel(); // default
 

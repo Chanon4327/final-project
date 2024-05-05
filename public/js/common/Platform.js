@@ -59,38 +59,6 @@ export class SpacePlatform extends Platform {
     }
 }
 
-// export class MovingPlatform extends Platform {
-//     constructor(x, y, width, height, minX, maxX, minY, maxY, speedX, speedY) {
-//         super(x, y, width, height, spacePlatformImage); // Initialize with the base class constructor
-//         this.minX = minX;
-//         this.maxX = maxX;
-//         this.minY = minY;
-//         this.maxY = maxY;
-//         this.speedX = speedX;
-//         this.speedY = speedY;
-//         this.directionX = 1;  // Moving right initially
-//         this.directionY = 0;  // Moving vertically is optional, set speedY to 0 if not needed
-//     }
-
-//     update() {
-//         // Move horizontally within the specified bounds
-//         if (this.speedX !== 0) {
-//             this.x += this.speedX * this.directionX;
-//             if (this.x <= this.minX || this.x + this.width >= this.maxX) {
-//                 this.directionX *= -1;  // Reverse direction when reaching the bounds
-//             }
-//         }
-
-//         // Move vertically within the specified bounds
-//         if (this.speedY !== 0) {
-//             this.y += this.speedY * this.directionY;
-//             if (this.y <= this.minY || this.y + this.height >= this.maxY) {
-//                 this.directionY *= -1;  // Reverse direction when reaching the bounds
-//             }
-//         }
-//     }
-// }
-
 export class MovingPlatform extends Platform {
     constructor(x, y, width, height, minX, maxX, minY, maxY, speedX, speedY) {
         super(x, y, width, height, spacePlatformImage); // Pass the image appropriate for the platform type
