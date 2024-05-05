@@ -10,7 +10,7 @@ function createForestPlatforms() {
     const platform = [
         new ForestPlatform(300, 600, 20, 20),
         new ForestPlatform(350, 700, 120, 20),
-        new ForestPlatform(100, 500, 60, 20),
+        //new ForestPlatform(100, 500, 60, 20),
         new ForestPlatform(200, 500, 60, 20),
         new ForestPlatform(350, 400, 120, 20),
         new ForestPlatform(600, 311, 120, 20),

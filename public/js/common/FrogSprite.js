@@ -4,6 +4,7 @@
 
 import { canvas, ctx } from '../script.js'
 import { Platform } from './Platform.js';
+import { Bird } from '../bird.js';
 
 export class FrogSprite {
     constructor() {
@@ -69,7 +70,7 @@ export class FrogSprite {
         return false; // In the air
     }
 
-    update(platforms) {
+    update(platforms, birds) {
         this.chargeJump();
     
         if (!this.onGround(platforms)) {
@@ -96,6 +97,15 @@ export class FrogSprite {
     
         this.handleHorizontalMovement(platforms);
         this.constrainToCanvas();
+
+        // Check for collision with each bird
+        birds.forEach(bird => {
+            if (this.collisionWithBird(bird)) {
+                console.log("Collision with bird detected!");
+                this.x -= 10;
+            }
+        });
+
     }
     
     collisionWithPlatform(platforms) {
@@ -124,6 +134,13 @@ export class FrogSprite {
             }
         }
         return null;
+    }
+
+    collisionWithBird(bird) {
+        return this.x < bird.x + bird.width &&
+           this.x + this.width > bird.x &&
+           this.y < bird.y + bird.height &&
+           this.y + this.height > bird.y;
     }
     
     handleHorizontalMovement(platforms) {
