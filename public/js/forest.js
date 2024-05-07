@@ -3,12 +3,12 @@ import { ForestPlatform, Platform } from './common/Platform.js';
 import { canvas, ctx } from './script.js';
 
 const backgroundImage = new Image();
-backgroundImage.src = '../css/forest.jpg';
+backgroundImage.src = '../css/forest.avif';
 
 function createForestPlatforms() {
 
     const platform = [
-        new ForestPlatform(300, 600, 20, 20),
+        new ForestPlatform(300, 600, 60, 20),
         new ForestPlatform(350, 700, 120, 20),
         //new ForestPlatform(100, 500, 60, 20),
         new ForestPlatform(200, 500, 60, 20),
